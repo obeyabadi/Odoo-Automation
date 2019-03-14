@@ -1,0 +1,16 @@
+[Unit]
+Description=Odoo11
+Requires=postgresql-10.service
+After=network.target postgresql-10.service
+
+[Service]
+Type=simple
+SyslogIdentifier=odoo11 
+PermissionsStartOnly=true 
+User=odoo 
+Group=odoo 
+ExecStart=/usr/bin/scl enable rh-python35 -- /opt/odoo/odoo11-venv/bin/python3 /opt/odoo/odoo11/odoo/odoo-bin -c /etc/odoo.conf 
+StandardOutput=journal+console 
+
+[Install]
+WantedBy=multi-user.target
